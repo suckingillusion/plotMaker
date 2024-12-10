@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>プロット作成</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>プロット作成</h1>
+  <hr>
+  <div>
+    <span class="futoji">キャラクター</span><br>
+    名前<input type="text" class="shortInput" id="charaInput1"><br>
+    説明<input type="text" class="shortInput" id="charaInput2">
+    <button class="smallButton" onclick="charaB()">追加</button>
+    <div id="charaNameDiv">
+      名前変更:
+    </div>
+  </div>
+  <hr>
+  <div>
+    <span class="futoji">場面</span><br>
+    <input type="text" class="shortInput" id="bamenInput">
+    <button class="smallButton" onclick="bamenB()">追加</button>
+  </div>
+  <hr>
+  <div>
+    <span class="futoji">セリフ</span><br>
+    <select  id="serifuSelect">
+      <option value="□">(キャラなし)</option>
+    </select>
+    <input type="text" class="shortInput" id="serifuInput"><label style="margin-left:10px"><input type="checkbox" id="thinkCheck">思考</label>
+    <button class="smallButton" onclick="serifuB()">追加</button>
+  </div>
+  <hr>
+  <div>
+    <span class="futoji">音・情報</span><br>
+    <input type="text" class="shortInput" id="jouhouInput">
+    <button class="smallButton" onclick="jouhouB()">追加</button>
+  </div>
+  <hr>
+  <span class="futoji">プロット</span><br>
+  <textarea  id="textarea1" cols="30" rows="1"></textarea><br>
+  <textarea  id="textarea2" cols="30" rows="1"></textarea>
+  <div id="hyoujiDiv">
+    
+  </div>
+  <!-- Project -->
+  <script src="main.js"></script>
+</body>
+</html>
