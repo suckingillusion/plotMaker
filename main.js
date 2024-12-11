@@ -34,6 +34,10 @@ class User{
   plotReturn(){
     return this.plots[this.plotNum];
   }
+  
+  nameChange(){
+    this.plotReturn().name = document.getElementById("daimeiInput").value;
+  }
 }
 
 let user = new User();
@@ -83,17 +87,20 @@ document.getElementById("jouhouInput").value = "";
 textarea2Add("    " + t1 + "\n");
 }
 
-function hozonB(){
-  let co = window.confirm("ブラウザに保存します");
-  if(co ==false)return;
+function hozonB(kakunin= true){
+  if(kakunin){
+    let co = window.confirm("ブラウザに保存します");
+    if(co ==false)return;
+  }
+  
   let _plot = user.plotReturn();
   _plot.p1 = document.getElementById("textarea1").value;
   _plot.p2 = document.getElementById("textarea2").value;
   let _data = [_plot.name,[].concat(_plot.chara),_plot.p1,_plot.p2];
   
-  var dbName = 'plotMakerDB';
-  var storeName  = 'sampleStore';
-  var dbVersion = 2;
+  var dbName = 'plotMakerDB2';
+  var storeName  = 'sampleStore2';
+  var dbVersion = 1;
   var keyValue = 'A1';
   var _plots = false;
 
@@ -108,23 +115,34 @@ function hozonB(){
     getReq.onsuccess = function(event) {
       //console.log(event.target.result); // {id : 'A1', plots : []}
       _plots = event.target.result.plots;
+      db.close();
       if (_plots == false) {
-        window.alert("失敗");
-        db.close();
+        if(kakunin){
+          window.alert("失敗");
+        }else{
+          return false;
+        }
         return;
       }
       _plots[user.plotNum] = _data;
       
-      var putReq = store.put({id:"A1",plots:_data});
+      
+      var putReq = store.put({id:"A1",plots:_plots});
 
       putReq.onsuccess = function() {
-        console.log('put data success');
+        if(kakunin){
+          console.log('put data success');
+        }
       }
 
       trans.oncomplete = function() {
         // トランザクション完了時(putReq.onsuccessの後)に実行
         console.log('transaction complete');
-        window.alert("保存");
+        if(kakunin){
+          window.alert("保存完了");
+        }else{
+          return true;
+        }
       }
     }
   }
@@ -153,10 +171,11 @@ function textareaHeightSet(){
 window.onload = ()=>{
   document.getElementById("textarea1").addEventListener("input",textareaHeightSet);
   document.getElementById("textarea2").addEventListener("input",textareaHeightSet);
+  document.getElementById("daimeiInput").addEventListener("input",user.nameChange);
   
-  var dbName = 'plotMakerDB';
-  var storeName  = 'sampleStore';
-  var dbVersion = 2;
+  var dbName = 'plotMakerDB2';
+  var storeName  = 'sampleStore2';
+  var dbVersion = 1;
 
   var openReq = indexedDB.open(dbName, dbVersion);
   // オブジェクトストアの作成・削除はDBの更新時しかできないので、バージョンを指定して更新
@@ -207,6 +226,7 @@ window.onload = ()=>{
     getReq.onsuccess = function(event) {
         //console.log(event.target.result); // {id : 'A1', plots : []}
         _plots = event.target.result.plots;
+        console.log("ん" +  _plots);
         for (var i = 0; i < _plots.length; i++) {
           if(_plots[i][0] ==null || _plots[i][0] ==undefined)continue;
           user.plots[i].name = _plots[i][0];
@@ -214,6 +234,7 @@ window.onload = ()=>{
           user.plots[i].p1 = _plots[i][2];
           user.plots[i].p2 = _plots[i][3];
         }
+        console.log(user.plots[0])
           
         document.getElementById("textarea1").value = user.plotReturn().p1;
         document.getElementById("textarea2").value = user.plotReturn().p2;
@@ -222,7 +243,7 @@ window.onload = ()=>{
         document.getElementById("charaNameDiv").innerHTML = "";
         for (var n = 0; n < user.plotReturn().chara.length; n++) {
             let num = n;
-            document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + t1 + "' id='name" + num + "'>"
+            document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + user.plotReturn().chara[num] + "' id='name" + num + "'>"
             document.getElementById("name" + num).addEventListener("input", (event) => {
               user.plotReturn().chara[num] = event.target.value;
               user.plotReturn().charaSelectSet();
@@ -238,3 +259,13 @@ window.onload = ()=>{
     console.log('db open error');
   }
 };
+
+
+function dbDelete(){
+  let con = window.confirm("really?");
+  if(con == false)return;
+  var dbName = 'plotMakerDB2';
+  var deleteReq = indexedDB.deleteDatabase(dbName);
+  window.alert("deleted.");
+
+}
