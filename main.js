@@ -2,7 +2,7 @@ const bamenSyokiText = "場所: ,時間: ";
 const maxPlot = 5;
 
 document.getElementById("textarea1").value = "○登場人物○\n";
-document.getElementById("bamenInput").value = this.bamenSyokiText;
+document.getElementById("bamenInput").value = bamenSyokiText;
 
 class Plot{
   constructor(){
@@ -101,7 +101,7 @@ function hozonB(){
 
   openReq.onsuccess = function(event) {
     var db = event.target.result;
-    var trans = db.transaction(storeName, 'readonly');
+    var trans = db.transaction(storeName, 'readwrite');
     var store = trans.objectStore(storeName);
     var getReq = store.get(keyValue);
 
