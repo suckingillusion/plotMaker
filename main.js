@@ -226,7 +226,6 @@ window.onload = ()=>{
     getReq.onsuccess = function(event) {
         //console.log(event.target.result); // {id : 'A1', plots : []}
         _plots = event.target.result.plots;
-        console.log("ん" +  _plots);
         for (var i = 0; i < _plots.length; i++) {
           if(_plots[i][0] ==null || _plots[i][0] ==undefined)continue;
           user.plots[i].name = _plots[i][0];
@@ -234,8 +233,8 @@ window.onload = ()=>{
           user.plots[i].p1 = _plots[i][2];
           user.plots[i].p2 = _plots[i][3];
         }
-        console.log(user.plots[0])
-          
+        
+        document.getElementById("daimeiInput").value = user.plotReturn().name;
         document.getElementById("textarea1").value = user.plotReturn().p1;
         document.getElementById("textarea2").value = user.plotReturn().p2;
           
