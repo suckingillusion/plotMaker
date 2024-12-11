@@ -115,7 +115,7 @@ function hozonB(){
       }
       _plots[user.plotNum] = _data;
       
-      var putReq = store.put(_data);
+      var putReq = store.put({id:"A1",plots:_data});
 
       putReq.onsuccess = function() {
         console.log('put data success');
