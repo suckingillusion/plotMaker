@@ -18,6 +18,11 @@
   <h1>プロット作成</h1>
   <hr>
   <div>
+    <span class="futoji">題名</span><br>
+    <input type="text" class="shortInput" id="daimeiInput">
+  </div>
+  <hr>
+  <div>
     <span class="futoji">キャラクター</span><br>
     名前<input type="text" class="shortInput" id="charaInput1"><br>
     説明<input type="text" class="shortInput" id="charaInput2">
@@ -49,7 +54,8 @@
   </div>
   <hr>
   <span class="futoji">プロット</span><br>
-  <button class="amallButton" onclick="hozonB()">保存</button><br><br>
+  <button class="smallButton" onclick="hozonB()">保存</button><br><br>
+  <button class="smallButton" onclick="dbDelete()">データ削除</button><br><br>
   <textarea  id="textarea1" cols="30" rows="1"></textarea><br>
   <textarea  id="textarea2" cols="30" rows="1"></textarea>
   <div id="hyoujiDiv">
