@@ -168,20 +168,28 @@ window.onload = ()=>{
     var db = event.target.result;
     db.createObjectStore(storeName, {keyPath : 'id'})
     
-    var data = {id:"A1",plots:[[],[],[],[],[]]};
+    var transaction = event.target.transaction;
+
+    transaction.oncomplete =
+      function(ev) {
+        // Now store is available to be populated
+        var data = { id: "A1", plots: [[], [], [], [], []] };
+
+        var trans = db.transaction(storeName, 'readwrite');
+        var store = trans.objectStore(storeName);
+        var putReq = store.put(data);
+
+        putReq.onsuccess = function() {
+          console.log('put data success');
+        }
+
+        trans.oncomplete = function() {
+          // トランザクション完了時(putReq.onsuccessの後)に実行
+          console.log('transaction complete');
+        }
+      }
     
-    var trans = db.transaction(storeName, 'readwrite');
-    var store = trans.objectStore(storeName);
-    var putReq = store.put(data);
-
-    putReq.onsuccess = function() {
-      console.log('put data success');
-    }
-
-    trans.oncomplete = function() {
-      // トランザクション完了時(putReq.onsuccessの後)に実行
-      console.log('transaction complete');
-    }
+    
   }
 
 
@@ -207,8 +215,8 @@ window.onload = ()=>{
           user.plots[i].p2 = _plots[i][3];
         }
           
-        document.getElementById("textarea1").value = user.plotRetun().p1;
-        document.getElementById("textarea2").value = user.plotRetun().p2;
+        document.getElementById("textarea1").value = user.plotReturn().p1;
+        document.getElementById("textarea2").value = user.plotReturn().p2;
           
         user.plotReturn().charaSelectSet();
         document.getElementById("charaNameDiv").innerHTML = "";
