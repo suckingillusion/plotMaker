@@ -237,6 +237,8 @@ window.onload = ()=>{
         document.getElementById("daimeiInput").value = user.plotReturn().name;
         document.getElementById("textarea1").value = user.plotReturn().p1;
         document.getElementById("textarea2").value = user.plotReturn().p2;
+
+        textareaHeightSet();
           
         user.plotReturn().charaSelectSet();
         document.getElementById("charaNameDiv").innerHTML = "";
