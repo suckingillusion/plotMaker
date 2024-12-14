@@ -53,7 +53,7 @@ function charaB(){
   document.getElementById("textarea1").value += t1 + ":\n" + t2 + "\n";
   textareaHeightSet();
   
-  let num = plot.chara.length -1;
+  let num = user.plotReturn().chara.length -1;
   document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + t1 +   "' id='name" + num  + "'>"
   document.getElementById("name" + num ).addEventListener("input",(event)=>{
     user.plotReturn().chara[num] = event.target.value;
