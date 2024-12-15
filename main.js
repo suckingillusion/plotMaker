@@ -17,7 +17,7 @@ class Plot{
   
   charaSelectSet(){
     let txt = '<option value="□">(キャラなし)</option>';
-    for (var i = 0; i < this.chara.length; i++) {
+    for (let i = 0; i < this.chara.length; i++) {
       txt += '<option value = "' + this.chara[i]  + '">' + this.chara[i] + '</option>';
     }
     document.getElementById("serifuSelect").innerHTML = txt;
@@ -242,7 +242,7 @@ window.onload = ()=>{
           
         user.plotReturn().charaSelectSet();
         document.getElementById("charaNameDiv").innerHTML = "";
-        for (var n = 0; n < user.plotReturn().chara.length; n++) {
+        for (let n = 0; n < user.plotReturn().chara.length; n++) {
             let num = n;
             document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + user.plotReturn().chara[num] + "' id='name" + num + "'>"
             document.getElementById("name" + num).addEventListener("input", (event) => {
