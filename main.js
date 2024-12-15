@@ -1,6 +1,7 @@
 const bamenSyokiText = "場所: ,時間: ";
 const maxPlot = 5;
 
+
 document.getElementById("textarea1").value = "○登場人物○\n";
 document.getElementById("bamenInput").value = bamenSyokiText;
 
@@ -42,6 +43,25 @@ class User{
 
 let user = new User();
 
+function inputCreate(x) {
+  document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + user.plotReturn().chara[x] + "' id='name" + x + "'>"
+  /*
+  document.getElementById("name" + x).addEventListener("input", (event) => {
+    const str = event.target.id;
+    const regex = /[^0-9]/g;
+    const result = str.replace(regex, "");
+    const number = parseInt(result);
+
+    user.plotReturn().chara[number] = event.target.value;
+    user.plotReturn().charaSelectSet();
+  });
+  */
+}
+
+function test(){
+  console.log(user.plotReturn().chara);
+}
+
 function charaB(){
   let t1 = document.getElementById("charaInput1").value;
   let t2 = document.getElementById("charaInput2").value;
@@ -54,14 +74,16 @@ function charaB(){
   textareaHeightSet();
   
   let num = user.plotReturn().chara.length -1;
-  function inputCreate(x){
-    document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + t1 +   "' id='name" + x  + "'>"
-    document.getElementById("name" + x ).addEventListener("input",(event)=>{
-      user.plotReturn().chara[x] = event.target.value;
-      user.plotReturn().charaSelectSet();
-    });
-  }
   inputCreate(num);
+}
+
+function charaChangeB(){
+  let _plot = user.plotReturn();
+  let charaLen = _plot.chara.length;
+  for (var i = 0; i < charaLen; i++) {
+    _plot.chara[i] = document.getElementById("name" + i).value;
+  }
+  _plot.charaSelectSet();
 }
 
 function bamenB(){
@@ -247,13 +269,6 @@ window.onload = ()=>{
         document.getElementById("charaNameDiv").innerHTML = "";
         for (let n = 0; n < user.plotReturn().chara.length; n++) {
             let num = n;
-            function inputCreate(x){
-              document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + user.plotReturn().chara[x] + "' id='name" + x + "'>"
-              document.getElementById("name" + x).addEventListener("input", (event) => {
-                user.plotReturn().chara[x] = event.target.value;
-                user.plotReturn().charaSelectSet();
-              });
-            }
             inputCreate(num);
         }
     }
