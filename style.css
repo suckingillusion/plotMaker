@@ -1,7 +1,7 @@
 body {
     font-size: 15px;
     background-color: black;
-    color: #363;
+    color: #ccc;
 }
 
 .futoji{
@@ -14,8 +14,10 @@ body {
 }
 
 .smallButton{
-  width:50px;
+  width:70px;
   margin-left:20px;
+  background-color: #164;
+  color: #ccc;
 }
 
 .name{
