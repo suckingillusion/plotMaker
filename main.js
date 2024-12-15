@@ -54,11 +54,14 @@ function charaB(){
   textareaHeightSet();
   
   let num = user.plotReturn().chara.length -1;
-  document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + t1 +   "' id='name" + num  + "'>"
-  document.getElementById("name" + num ).addEventListener("input",(event)=>{
-    user.plotReturn().chara[num] = event.target.value;
-    user.plotReturn().charaSelectSet();
-  });
+  function inputCreate(x){
+    document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + t1 +   "' id='name" + x  + "'>"
+    document.getElementById("name" + x ).addEventListener("input",(event)=>{
+      user.plotReturn().chara[x] = event.target.value;
+      user.plotReturn().charaSelectSet();
+    });
+  }
+  inputCreate(num);
 }
 
 function bamenB(){
@@ -244,12 +247,14 @@ window.onload = ()=>{
         document.getElementById("charaNameDiv").innerHTML = "";
         for (let n = 0; n < user.plotReturn().chara.length; n++) {
             let num = n;
-            document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + user.plotReturn().chara[num] + "' id='name" + num + "'>"
-            document.getElementById("name" + num).addEventListener("input", (event) => {
-              user.plotReturn().chara[num] = event.target.value;
-              user.plotReturn().charaSelectSet();
-            });
-          
+            function inputCreate(x){
+              document.getElementById("charaNameDiv").innerHTML += "<input type='text' class='name' value = '" + user.plotReturn().chara[x] + "' id='name" + x + "'>"
+              document.getElementById("name" + x).addEventListener("input", (event) => {
+                user.plotReturn().chara[x] = event.target.value;
+                user.plotReturn().charaSelectSet();
+              });
+            }
+            inputCreate(num);
         }
     }
     // 接続を解除する
