@@ -4,6 +4,11 @@ body {
     color: #ccc;
 }
 
+input,textarea{
+    background-color: #333;
+    color: #777;
+}
+
 .futoji{
   font-weight: bold;
 }
