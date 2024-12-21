@@ -1,7 +1,7 @@
 body {
     font-size: 15px;
     background-color: black;
-    color: #ccc;
+    color: #aaa;
 }
 
 input,textarea,select{
@@ -21,7 +21,7 @@ input,textarea,select{
 .smallButton{
   width:70px;
   margin-left:20px;
-  background-color: #164;
+  background-color: #153;
   color: #ccc;
 }
 
