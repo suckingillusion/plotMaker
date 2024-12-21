@@ -4,9 +4,9 @@ body {
     color: #ccc;
 }
 
-input,textarea{
+input,textarea,select{
     background-color: #333;
-    color: #777;
+    color: #999;
 }
 
 .futoji{
