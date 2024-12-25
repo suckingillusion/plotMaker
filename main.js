@@ -125,6 +125,7 @@ function autoHozonB(){
 }
 
 function hozonB(kakunin = true) {
+  //毎秒保存で引数falseを使用
   if (kakunin) {
     let co = window.confirm("ブラウザに保存します");
     if (co == false) return;
@@ -210,6 +211,14 @@ window.onload = () => {
   document.getElementById("textarea2").addEventListener("input", textareaHeightSet);
   document.getElementById("daimeiInput").addEventListener("input", user.nameChange);
 
+  //離脱時のダイアログ表示
+  window.addEventListener('beforeunload', (e) => {
+    const message = '入力内容が保存されない可能性があります。ページを離れますか？';
+    e.preventDefault();
+    e.returnValue = message;
+    return message;
+  });
+
   var dbName = 'plotMakerDB2';
   var storeName = 'sampleStore2';
   var dbVersion = 1;
@@ -291,7 +300,8 @@ window.onload = () => {
     // 接続に失敗
     console.log('db open error');
   }
-  
+
+  //毎秒保存の処理
   setInterval(()=>{
     if(isAutoHozon){
       hozonB(false);
