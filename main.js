@@ -1,6 +1,6 @@
 const bamenSyokiText = "場所: ,時間: ";
 const maxPlot = 5;
-let isAutoHozon = true;
+let isAutoHozon = false;
 
 
 document.getElementById("textarea1").value = "○登場人物○\n";
